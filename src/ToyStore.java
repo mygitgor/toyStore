@@ -43,4 +43,13 @@ public class ToyStore {
             }
         }return suitabletoys;
     }
+
+    public Toy getRandomLotoreyToy(){
+        double randomValue = Math.random();
+        double simulWeight = 0;
+        for(Toy toy : toys){
+            simulWeight += toy.getWeight();
+            if(randomValue <= simulWeight){return toy;}
+        }return null;
+    }
 }
