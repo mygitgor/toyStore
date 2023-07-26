@@ -9,7 +9,9 @@ public class Main {
         toyStore.addToy(toy3);
         toyStore.addToy(toy2);
         toyStore.addToy(toy1);
-
+        toyStore.addToy(new Toy(4, "robot", 60, 200));
+        toyStore.addToy(new Toy(5, "robotbig", 70, 250));
+        toyStore.saveToysToFile("toys.data");
 
         int remove = 2;
         toyStore.removeToy(remove);
@@ -25,6 +27,7 @@ public class Main {
         System.out.println(toyStore.findToysByPrice(byPriceMin,byPriceMax));
         System.out.println("-------------------------------");
         
-        System.out.println(toyStore.getRandomLotoreyToy());
+        System.out.println(toyStore.getRandomToy());
+
     }
 }

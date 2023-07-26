@@ -1,5 +1,11 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ToyStore {
     private List<Toy> toys;
@@ -12,8 +18,35 @@ public class ToyStore {
         toys.add(toy);
     }
 
+    public Toy getRandomToy(){
+        if(toys.isEmpty()){
+            return null;
+        }
+
+        Random random = new Random();
+        int index = random.nextInt(toys.size());
+        return toys.get(index);
+    }
+
     public void removeToy(int id){
         toys.removeIf(toy -> toy.getId() == id);
+    }
+
+    public void loadToysFromFile(String filename){
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filename))){
+            toys = (List<Toy>) inputStream.readObject();
+
+        }catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveToysToFile(String filename){
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))){
+            outputStream.writeObject(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Toy findToyById(int id){
